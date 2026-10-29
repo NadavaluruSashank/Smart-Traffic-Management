@@ -11,7 +11,7 @@ import sys
 import os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "src"))
-from optimize_signals import recommend_signal_timing, estimate_congestion_reduction
+from optimize_signals import recommend_signal_timing, adaptive_change_rate
 
 st.set_page_config(page_title="Smart Traffic Management", layout="wide")
 
@@ -36,7 +36,7 @@ try:
     col1.metric("Avg Vehicle Count", f"{filtered['vehicle_count'].mean():.0f}")
     col2.metric("Avg Speed (km/h)", f"{filtered['avg_speed_kmh'].mean():.1f}")
     col3.metric("Current State", filtered.iloc[-1]["traffic_state"])
-    col4.metric("Est. Congestion Reduction", f"{estimate_congestion_reduction(df)}%")
+    col4.metric("Adaptive Timing Changes", f"{adaptive_change_rate(df)}%")
 
     st.subheader("Vehicle Count Over Time")
     st.line_chart(filtered.set_index("timestamp")["vehicle_count"])
