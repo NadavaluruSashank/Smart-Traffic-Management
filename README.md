@@ -124,6 +124,6 @@ streamlit run dashboard/app.py
 
 ## Author
 
-**Nadavaluru Sashank**
-Data Scientist · MSc Data Science & AI @ DSTI School of Engineering, Paris
-[LinkedIn](https://www.linkedin.com/in/sashank-nadavaluru) · [GitHub](https://github.com/NadavaluruSashank)
+**Nadavaluru Sashank**  
+Data Scientist · MSc Data Science & AI @ DSTI School of Engineering, Paris  
+[LinkedIn](https://www.linkedin.com/in/nadavaluru-sashank-425617270) · [GitHub](https://github.com/NadavaluruSashank)
