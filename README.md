@@ -81,11 +81,11 @@ Trained and evaluated on 3,360 simulated sensor readings across 5 intersections 
 | Classification accuracy | **99.7%** |
 | Precision (weighted avg) | 1.00 |
 | Recall (weighted avg) | 1.00 |
-| Estimated congestion reduction (adaptive vs. fixed 45s timing) | **~22%** |
+| Intervals where adaptive timing differs from a fixed 45s cycle | **72.8%** |
 
 **Top predictive features:** vehicle count, traffic density, average speed, and rolling average vehicle count.
 
-*Note: high accuracy reflects the rule-based simulation used to generate labels — the pipeline (feature engineering, classification, adaptive optimization) is designed to transfer directly to real IoT sensor feeds.*
+*Note: the labels come from rules on vehicle count and speed, so the classifier is close to perfect by construction. The value of the project is the pipeline (simulation, feature engineering, classification, adaptive timing), which is built to swap in real IoT sensor feeds. Measuring an actual congestion reduction would need a traffic simulator (e.g. SUMO) or field data.*
 
 ---
 
