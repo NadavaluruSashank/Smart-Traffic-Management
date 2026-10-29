@@ -46,18 +46,17 @@ def optimize_intersection_schedule(df, intersection_id):
                     "recommended_green_seconds", "timing_adjustment"]]
 
 
-def estimate_congestion_reduction(df):
+def adaptive_change_rate(df, baseline=45):
     """
-    Rough estimate of congestion reduction from adaptive timing,
-    based on how often adaptive timing differs from a fixed baseline.
+    Share of intervals (%) where the adaptive plan recommends a different
+    green time than a fixed-cycle baseline.
+
+    This measures how often adaptive timing would act, not a measured
+    reduction in congestion: that would need a traffic simulator or a
+    before/after field test.
     """
-    df = df.copy()
-    df["recommended"] = df["traffic_state"].apply(recommend_signal_timing)
-    baseline = 45
-    improvement_ratio = (df["recommended"] != baseline).mean()
-    # Heuristic: proportion of adaptive changes translates to ~0.3x reduction estimate
-    estimated_reduction_pct = round(improvement_ratio * 30, 1)
-    return estimated_reduction_pct
+    recommended = df["traffic_state"].apply(recommend_signal_timing)
+    return round((recommended != baseline).mean() * 100, 1)
 
 
 if __name__ == "__main__":
@@ -67,5 +66,5 @@ if __name__ == "__main__":
     print("Sample signal timing schedule (Intersection 1):")
     print(schedule.head(10))
 
-    reduction = estimate_congestion_reduction(df)
-    print(f"\nEstimated congestion reduction from adaptive timing: ~{reduction}%")
+    rate = adaptive_change_rate(df)
+    print(f"\nIntervals where adaptive timing differs from fixed 45s: {rate}%")
